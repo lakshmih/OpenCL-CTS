@@ -181,7 +181,7 @@ int run_test_with_two_queue(cl_context &context, cl_command_queue &cmd_queue1,
             for (size_t bIdx = 0; bIdx < numBuffers; bIdx++)
             {
                 vkBufferListDeviceMemory.push_back(
-                    new VulkanDeviceMemory(vkDevice, bufferSize, memoryType,
+                    new VulkanDeviceMemory(vkDevice, vkBufferList[bIdx], memoryType,
                                            vkExternalMemoryHandleType));
                 externalMemory.push_back(new clExternalMemory(
                     vkBufferListDeviceMemory[bIdx], vkExternalMemoryHandleType,
@@ -480,7 +480,7 @@ int run_test_with_one_queue(cl_context &context, cl_command_queue &cmd_queue1,
             for (size_t bIdx = 0; bIdx < numBuffers; bIdx++)
             {
                 vkBufferListDeviceMemory.push_back(
-                    new VulkanDeviceMemory(vkDevice, bufferSize, memoryType,
+                    new VulkanDeviceMemory(vkDevice, vkBufferList[bIdx], memoryType,
                                            vkExternalMemoryHandleType));
                 externalMemory.push_back(new clExternalMemory(
                     vkBufferListDeviceMemory[bIdx], vkExternalMemoryHandleType,
@@ -771,7 +771,7 @@ int run_test_with_multi_import_same_ctx(
                     if (withOffset == 0)
                     {
                         vkBufferListDeviceMemory.push_back(
-                            new VulkanDeviceMemory(vkDevice, pBufferSize,
+                            new VulkanDeviceMemory(vkDevice, vkBufferList[bIdx],
                                                    memoryType,
                                                    vkExternalMemoryHandleType));
                     }
