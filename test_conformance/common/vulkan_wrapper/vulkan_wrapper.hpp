@@ -311,9 +311,11 @@ public:
                         const VulkanDescriptorSetLayout &descriptorSetLayout);
     virtual ~VulkanDescriptorSet();
     void update(uint32_t binding, const VulkanBuffer &buffer);
-    void updateArray(uint32_t binding, unsigned numBuffers, const VulkanBufferList &buffers);
+    void updateArray(uint32_t binding, unsigned numBuffers,
+                     const VulkanBufferList &buffers);
     void update(uint32_t binding, const VulkanImageView &imageView);
-    void updateArray(uint32_t binding, const VulkanImageViewList &imageViewList);
+    void updateArray(uint32_t binding,
+                     const VulkanImageViewList &imageViewList);
     operator VkDescriptorSet() const;
 };
 
@@ -409,7 +411,7 @@ protected:
     VkBuffer m_vkBuffer;
     uint64_t m_size;
     uint64_t m_alignment;
-    bool     m_dedicated;
+    bool m_dedicated;
     VulkanMemoryTypeList m_memoryTypeList;
 
     VulkanBuffer(const VulkanBuffer &buffer);
@@ -533,7 +535,7 @@ public:
     VulkanDeviceMemory(const VulkanDevice &device, const VulkanBuffer &buffer,
                        const VulkanMemoryType &memoryType,
                        VulkanExternalMemoryHandleType externalMemoryHandleType =
-                       VULKAN_EXTERNAL_MEMORY_HANDLE_TYPE_NONE,
+                           VULKAN_EXTERNAL_MEMORY_HANDLE_TYPE_NONE,
                        const void *name = NULL);
     virtual ~VulkanDeviceMemory();
     uint64_t getSize() const;
