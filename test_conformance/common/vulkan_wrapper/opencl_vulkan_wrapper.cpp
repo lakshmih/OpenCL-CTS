@@ -886,8 +886,8 @@ VulkanImageTiling vkClExternalMemoryHandleTilingAssumption(
 
     *error_ret = clGetDeviceInfo(
         deviceId,
-        CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_HANDLE_TYPES_KHR, 0,
-        nullptr, &size);
+        CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_IMAGES_HANDLE_TYPES_KHR,
+        0, nullptr, &size);
     if (*error_ret != CL_SUCCESS)
     {
         return mode;
@@ -903,8 +903,8 @@ VulkanImageTiling vkClExternalMemoryHandleTilingAssumption(
 
     *error_ret = clGetDeviceInfo(
         deviceId,
-        CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_HANDLE_TYPES_KHR, size,
-        assume_linear_types.data(), nullptr);
+        CL_DEVICE_EXTERNAL_MEMORY_IMPORT_ASSUME_LINEAR_IMAGES_HANDLE_TYPES_KHR,
+        size, assume_linear_types.data(), nullptr);
     if (*error_ret != CL_SUCCESS)
     {
         return mode;
