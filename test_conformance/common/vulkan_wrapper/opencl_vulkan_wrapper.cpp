@@ -19,7 +19,7 @@
 #include "harness/errorHelpers.h"
 #include "harness/deviceInfo.h"
 #include <assert.h>
-#include <iostream>
+#include <algorithm>
 #include <stdexcept>
 
 #define ASSERT(x) assert((x))
