@@ -318,7 +318,34 @@ cl_program makeMixedFormatPrintfProgram(cl_kernel* kernel_ptr,
             const float max_range = 100000.f;
             float arg = get_random_float(-max_range, max_range, gMTdata);
             args_str << str_sprintf("%f", arg) << "f, ";
-            ref_str << str_sprintf(format, arg) << ", ";
+
+            // %a and %A has default precision of 13 on MSVC which results in
+            // padded zeroes. As per OpenCL C Specification 3.0: 6.15.14.2. if
+            // precision is missing, implementations only need to have
+            // sufficient precision for an exact representation of the value.
+            if (format == "%a" || format == "%A")
+            {
+                std::string hex_float = str_sprintf(format, arg);
+                for (size_t index = hex_float.size() - 1; index > 0; index--)
+                {
+                    if (hex_float[index] == 'p' || hex_float[index] == 'P')
+                    {
+                        index--;
+                        while (hex_float[index] == '0'
+                               && hex_float[index - 1] != '.')
+                        {
+                            hex_float.erase(index, 1);
+                            index--;
+                        }
+                        break;
+                    }
+                }
+                ref_str << hex_float << ", ";
+            }
+            else
+            {
+                ref_str << str_sprintf(format, arg) << ", ";
+            }
         }
     }
     // Restore the original CPU rounding mode
